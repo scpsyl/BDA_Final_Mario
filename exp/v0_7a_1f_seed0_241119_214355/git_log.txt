@@ -1,0 +1,44 @@
+54ec416
+
+commit 54ec416c17825b46f61a26bc1c8f3bc160eaab2f
+Author: scpsyl <liuys117810@gmail.com>
+Date:   Fri Nov 15 21:49:55 2024 +0800
+
+    first commit baseline
+
+ exp/v0_7a_1f_seed0/ckpt/ckpt_best.pth.tar          |  Bin 0 -> 14880533 bytes
+ exp/v0_7a_1f_seed0/ckpt/iteration_0.pth.tar        |  Bin 0 -> 14880533 bytes
+ exp/v0_7a_1f_seed0/ckpt/iteration_10000.pth.tar    |  Bin 0 -> 14880533 bytes
+ exp/v0_7a_1f_seed0/formatted_total_config.py       |  127 ++
+ exp/v0_7a_1f_seed0/git_diff.txt                    |    0
+ exp/v0_7a_1f_seed0/git_log.txt                     |   10 +
+ exp/v0_7a_1f_seed0/log/buffer/buffer_logger.txt    |  987 +++++++++
+ .../log/collector/collector_logger.txt             | 2286 ++++++++++++++++++++
+ .../log/evaluator/evaluator_logger.txt             |  182 ++
+ exp/v0_7a_1f_seed0/log/learner/learner_logger.txt  | 1210 +++++++++++
+ .../events.out.tfevents.1731605431.LAPTOP-0VHL6G98 |  Bin 0 -> 441695 bytes
+ exp/v0_7a_1f_seed0/total_config.py                 |  124 ++
+ .../ckpt/ckpt_best.pth.tar                         |  Bin 0 -> 7440797 bytes
+ .../ckpt/iteration_0.pth.tar                       |  Bin 0 -> 14880533 bytes
+ .../formatted_total_config.py                      |  127 ++
+ exp/v0_7a_1f_seed0_241115_214827/git_diff.txt      |    0
+ exp/v0_7a_1f_seed0_241115_214827/git_log.txt       |   10 +
+ .../log/buffer/buffer_logger.txt                   |   70 +
+ .../log/collector/collector_logger.txt             |  144 ++
+ .../log/evaluator/evaluator_logger.txt             |   26 +
+ .../log/learner/learner_logger.txt                 |  110 +
+ .../events.out.tfevents.1731678509.LAPTOP-0VHL6G98 |  Bin 0 -> 29437 bytes
+ exp/v0_7a_1f_seed0_241115_214827/total_config.py   |  124 ++
+ ...o-video-2024-11-14_22-17-33-episode-0.meta.json |    1 +
+ .../mario-video-2024-11-14_22-17-33-episode-0.mp4  |  Bin 0 -> 448700 bytes
+ test.py                                            |   24 +
+ 26 files changed, 5562 insertions(+)
+
+commit ccec40bd7750e05934527b6d518c5c10cf99013b
+Author: Yushan Liu <liuys117810@gmail.com>
+Date:   Thu Nov 14 22:09:42 2024 +0800
+
+    Initial commit
+
+ README.md | 2 ++
+ 1 file changed, 2 insertions(+)

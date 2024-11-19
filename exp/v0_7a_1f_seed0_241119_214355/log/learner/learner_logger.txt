@@ -1,0 +1,27 @@
+[2024-11-19 21:43:57][base_learner.py:338][INFO] [RANK0]: DI-engine DRL Policy
+DQN(
+  (encoder): ConvEncoder(
+    (act): ReLU()
+    (main): Sequential(
+      (0): Conv2d(1, 32, kernel_size=(8, 8), stride=(4, 4))
+      (1): ReLU()
+      (2): Conv2d(32, 64, kernel_size=(4, 4), stride=(2, 2))
+      (3): ReLU()
+      (4): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1))
+      (5): ReLU()
+      (6): Flatten(start_dim=1, end_dim=-1)
+    )
+    (mid): Linear(in_features=6272, out_features=128, bias=True)
+  )
+  (head): DiscreteHead(
+    (Q): Sequential(
+      (0): Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): ReLU()
+      )
+      (1): Sequential(
+        (0): Linear(in_features=128, out_features=7, bias=True)
+      )
+    )
+  )
+)
