@@ -38,7 +38,11 @@ def evaluate(args, state_dict, seed, video_dir_path, eval_times):
     # 加载配置
     cfg = compile_config(mario_dqn_config, create_cfg=mario_dqn_create_config, auto=True, save_cfg=False)
     # 实例化DQN模型
+    
     model = DQN(**cfg.policy.model)
+
+    # model.to('cpu')
+
     # 加载模型权重文件
     model.load_state_dict(state_dict['model'])
     # 生成环境
@@ -81,7 +85,7 @@ if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--seed", "-s", type=int, default=0)
-    parser.add_argument("--checkpoint", "-ckpt", type=str, default='./exp/v0_1a_7f_seed0/ckpt/ckpt_best.pth.tar')
+    parser.add_argument("--checkpoint", "-ckpt", type=str, default='D:/Desktop/BDA_Final_Mario/exp/v0_7a_1f_seed0_241119_215539/ckpt/iteration_300000.pth.tar')
     parser.add_argument("--replay_path", "-rp", type=str, default='./eval_videos')
     parser.add_argument("--version", "-v", type=int, default=0, choices=[0,1,2,3])
     parser.add_argument("--action", "-a", type=int, default=7, choices=[2,7,12])
