@@ -1,0 +1,148 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{hyperref}
+
+% Title Page Configuration
+\title{\textbf{Feature Engineering Exploration in Mario Game AI}}
+\author{
+    Group Members: \\
+    Member 1 Name \\
+    Member 2 Name \\
+    Member 3 Name
+}
+\date{\today}
+
+\begin{document}
+
+% Title Page
+\begin{titlepage}
+    \centering
+    \vspace*{1.5cm}
+    {\Huge \textbf{Feature Engineering Exploration in Mario Game AI}} \\
+    \vspace{2cm}
+    \Large \textbf{Project Proposal} \\
+    \vspace{3cm}
+    \textbf{Group Members:} \\ 
+    \vspace{1cm}
+    Yushan Liu \ 2024214103 \\
+    Xintao Chao \ 2024213928 \\
+    Wenxuan Zhu \ 2024213949 \\
+    \vspace{2cm}
+    \today
+    \vfill
+    The GitHub repository for this project is available at: \url{https://github.com/scpsyl/LFD_Final_Mario}.
+\end{titlepage}
+
+\newpage
+
+
+\section*{Introduction}
+This project explores feature engineering techniques in training an intelligent Mario game agent using reinforcement learning (RL). The goal is to analyze how modifications to observation space, action space, and reward space affect the agent’s learning efficiency and performance in the Super Mario Bros game environment.
+
+\section*{Background}
+The project is built upon the DI-adventure framework, which is designed for RL tasks in the Mario game environment. The agent learns to navigate and complete levels using Deep Q-Networks (DQN). The environment is ideal for experimentation due to its dynamic nature, high-dimensional observation space, and complex action requirements.
+
+\section*{Scope and Objectives}
+The main objective is to investigate how different feature engineering strategies impact the agent's learning process. The specific goals include:
+\begin{itemize}
+    \item Modifying observation space through techniques like image downsampling, frame stacking, and content simplification.
+    \item Experimenting with action space configurations such as simplifying or enriching action sets and incorporating sticky actions.
+    \item Exploring reward space modifications, such as sparse rewards and adding specific incentives (e.g., coin collection).
+\end{itemize}
+The ultimate goal is to find the most effective feature engineering strategies that enhance learning efficiency and performance while considering computational constraints.
+
+\section*{Proposed Methodology}
+
+\subsection*{Baseline Setup}
+\begin{itemize}
+    \item Set up the DI-adventure framework with default observation, action, and reward spaces.
+    \item Train the baseline model with one random seed and evaluate its performance in terms of rewards and gameplay efficiency.
+\end{itemize}
+
+\subsection*{Feature Engineering Experiments}
+\begin{itemize}
+    \item \textbf{Observation Space:}
+    \begin{itemize}
+        \item Implement frame stacking (\texttt{-o 4}) to capture motion dynamics.
+        \item Simplify game content by switching to different environment versions (e.g., \texttt{-v 1}, \texttt{-v 2}).
+        \item Downsample image resolution to reduce computational load.
+    \end{itemize}
+    \item \textbf{Action Space:}
+    \begin{itemize}
+        \item Simplify actions (e.g., only right movement and jump: \texttt{{[}'right'{]}, {[}'right', 'A'{]}}).
+        \item Experiment with complex action sets (\texttt{COMPLEX\_MOVEMENT}) for richer gameplay.
+        \item Add sticky actions for increased randomness.
+    \end{itemize}
+    \item \textbf{Reward Space:}
+    \begin{itemize}
+        \item Implement sparse rewards to encourage goal-oriented behavior.
+        \item Introduce coin-based rewards to incentivize specific actions.
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Performance Evaluation}
+\begin{itemize}
+    \item Use TensorBoard to track reward trends, steps per episode, and Q-value dynamics.
+    \item Evaluate performance using gameplay videos and Class Activation Mapping (CAM).
+    \item Quantify key metrics: average reward, steps per episode, and learning curves.
+\end{itemize}
+
+\section*{Environment and Tools}
+\begin{itemize}
+    \item \textbf{Platform:} Python 3.8
+    \item \textbf{Libraries:} PyTorch 1.10.0, OpenCV, DI-engine
+    \item \textbf{Environment:} Super Mario Bros RL simulation (DI-adventure framework)
+    \item \textbf{Hardware:} GPU-enabled systems for efficient training
+\end{itemize}
+
+\section*{Expected Outcomes}
+This project is expected to provide insights into how feature engineering impacts RL agent performance in dynamic environments. We aim to identify the most effective feature engineering strategies that improve learning efficiency, especially under computational constraints.
+
+\section*{Deliverables}
+\begin{itemize}
+    \item A trained Mario game agent with baseline and modified feature settings.
+    \item A comprehensive analysis of experimental results.
+    \item Project documentation and a presentation summarizing findings and conclusions.
+\end{itemize}
+
+This project aims to contribute valuable insights into the application of feature engineering techniques in RL tasks, particularly in dynamic video game environments like Super Mario Bros.
+
+\newpage
+
+\begin{thebibliography}{9}
+
+    \bibitem{di_adventure} 
+    OpenDILab DI-adventure. 
+    \textit{GitHub Repository for RL Projects}. 
+    Available at: \url{https://github.com/opendilab/DI-adventure}.
+    
+    \bibitem{di_engine} 
+    OpenDILab DI-engine. 
+    \textit{GitHub Repository for Reinforcement Learning Algorithms}. 
+    Available at: \url{https://github.com/opendilab/DI-engine}.
+    
+    \bibitem{gym_super_mario_bros} 
+    Gym Super Mario Bros. 
+    \textit{Python API for Super Mario Bros Reinforcement Learning Environment}. 
+    Available at: \url{https://github.com/Kautenja/gym-super-mario-bros}.
+    
+    \bibitem{nature_rl} 
+    Mnih, V., et al. 
+    \textit{Human-level Control Through Deep Reinforcement Learning}. 
+    Nature, 2015. 
+    Available at: \url{https://www.nature.com/articles/nature14236}.
+    
+    \bibitem{action_space} 
+    Dulac-Arnold, G., et al. 
+    \textit{Action Space Shaping in Deep Reinforcement Learning}. 
+    Available at: \url{https://arxiv.org/pdf/2004.00980.pdf}.
+    
+    \bibitem{rl_overview} 
+    Weng, L. 
+    \textit{Reinforcement Learning Overview}. 
+    Available at: \url{https://lilianweng.github.io/posts/2018-02-19-rl-overview/}.
+    
+    \end{thebibliography}
+    
+\end{document}

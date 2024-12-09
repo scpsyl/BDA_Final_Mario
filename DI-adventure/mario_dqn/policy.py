@@ -135,10 +135,6 @@ class DQNPolicy(Policy):
             Return this algorithm default model setting for demonstration.
         Returns:
             - model_info (:obj:`Tuple[str, List[str]]`): model name and mode import_names
-
-        .. note::
-            The user can define and use customized network model but must obey the same inferface definition indicated \
-            by import_names path. For DQN, ``ding.model.template.q_learning.DQN``
         """
         return 'dqn', ['ding.model.template.q_learning']
 
@@ -168,22 +164,11 @@ class DQNPolicy(Policy):
         self._learn_model.reset()
         self._target_model.reset()
 
+
     def _forward_learn(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """
         Overview:
             Forward computation graph of learn mode(updating policy).
-        Arguments:
-            - data (:obj:`Dict[str, Any]`): Dict type data, a batch of data for training, values are torch.Tensor or \
-                np.ndarray or dict/list combinations.
-        Returns:
-            - info_dict (:obj:`Dict[str, Any]`): Dict type data, a info dict indicated training result, which will be \
-                recorded in text log and tensorboard, values are python scalar or a list of scalars.
-        ArgumentsKeys:
-            - necessary: ``obs``, ``action``, ``reward``, ``next_obs``, ``done``
-            - optional: ``value_gamma``, ``IS``
-        ReturnsKeys:
-            - necessary: ``cur_lr``, ``total_loss``, ``priority``
-            - optional: ``action_distribution``
         """
         data = default_preprocess_learn(
             data,
@@ -201,14 +186,16 @@ class DQNPolicy(Policy):
         self._target_model.train()
         # Current q value (main model)
         q_value = self._learn_model.forward(data['obs'], mode='compute_q')['logit']
-        # Target q value
+        # Target q value using Double DQN
         with torch.no_grad():
             target_q_value = self._target_model.forward(data['next_obs'], mode='compute_q')['logit']
-            # Max q value action (main model)
+            # 使用主模型选择动作
             target_q_action = self._learn_model.forward(data['next_obs'], mode='compute_q')['action']
+            # 选择目标q值
+            target_q = target_q_value.gather(1, target_q_action.unsqueeze(1)).squeeze(1)
 
         data_n = q_nstep_td_data(
-            q_value, target_q_value, data['action'], target_q_action, data['reward'], data['done'], data['weight']
+            q_value, target_q, data['action'], data['reward'], data['done'], data['weight']
         )
         value_gamma = data.get('value_gamma')
         loss, td_error_per_sample = q_nstep_td_error(data_n, self._gamma, nstep=self._nstep, value_gamma=value_gamma)
@@ -230,10 +217,8 @@ class DQNPolicy(Policy):
             'cur_lr': self._optimizer.defaults['lr'],
             'total_loss': loss.item(),
             'q_value': q_value.mean().item(),
-            'target_q_value': target_q_value.mean().item(),
+            'target_q_value': target_q.mean().item(),
             'priority': td_error_per_sample.abs().tolist(),
-            # Only discrete action satisfying len(data['action'])==1 can return this and draw histogram on tensorboard.
-            # '[histogram]action_distribution': data['action'],
         }
 
     def _monitor_vars_learn(self) -> List[str]:

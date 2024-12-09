@@ -29,9 +29,9 @@ mario_dqn_config = dict(
             # 有多少个可选动作
             action_shape=7,
             # 网络结构超参数
-            encoder_hidden_size_list=[32, 64, 128],
+            encoder_hidden_size_list= [256,256,128], #[32, 64, 128],
             # 是否使用对决网络 Dueling Network
-            dueling=False,
+            dueling=True, # False -> True
         ),
         # n-step TD
         nstep=3,
